@@ -24,21 +24,21 @@ The final two-stage fine-tuning pipeline achieved **76.79% accuracy** on an unto
 
 ## Methodology
 
-The model is `MobileNetV3-small` initialized with `IMAGENET1K_V1` pretrained weights. The notebook follows the preprocessing associated with these weights: resize to 256 pixels, centre crop to 224×224, conversion to a tensor, and ImageNet RGB normalization. [1]
+The model is `MobileNetV3-small` initialized with `IMAGENET1K_V1` pretrained weights. The notebook follows the preprocessing associated with these weights: resize to 256 pixels, centre crop to 224×224, conversion to a tensor, and ImageNet RGB normalization.
 
-The data pipeline uses `ImageFolder`, where each medication class is represented by a separate directory of images. [2] The original `train/` folder is split stratified into training and validation subsets, while the provided `test/` folder is reserved for the final evaluation only.
+The data pipeline uses `ImageFolder`, where each medication class is represented by a separate directory of images. The original `train/` folder is split stratified into training and validation subsets, while the provided `test/` folder is reserved for the final evaluation only.
 
-Training consists of two stages. First, the feature extractor is frozen and the classifier head is trained for eight epochs. Second, the last three feature blocks and the classifier are fine-tuned with lower learning rates. The procedure uses `AdamW`, `ReduceLROnPlateau`, checkpointing based on validation loss, and early stopping. This is consistent with the standard distinction between a fixed feature extractor and partial fine-tuning in transfer learning. [3]
+Training consists of two stages. First, the feature extractor is frozen and the classifier head is trained for eight epochs. Second, the last three feature blocks and the classifier are fine-tuned with lower learning rates. The procedure uses `AdamW`, `ReduceLROnPlateau`, checkpointing based on validation loss, and early stopping. This is consistent with the standard distinction between a fixed feature extractor and partial fine-tuning in transfer learning.
 
 The notebook also includes a class-level precision/recall/F1 report and a full confusion matrix for analysis of final-test errors.
 
 ## Dataset
 
-This project uses an 84-class subset of the publicly available [OGYEIv2 dataset on Kaggle](https://www.kaggle.com/datasets/richardradli/ogyeiv2), an image collection for pill recognition created by Richárd Rádli and collaborators. The full OGYEIv2 collection contains 112 pill classes and 4,480 images. [4]
+This project uses an 84-class subset of the publicly available [OGYEIv2 dataset on Kaggle](https://www.kaggle.com/datasets/richardradli/ogyeiv2), an image collection for pill recognition created by Richárd Rádli and collaborators. The full OGYEIv2 collection contains 112 pill classes and 4,480 images.
 
 The experiment uses 2,352 images in the provided training folder and 504 images in the external test folder. The notebook checks that class-to-index mappings are identical in the `train/` and `test/` directories before training.
 
-> **Data notice:** Dataset files are not copied into this repository. Download OGYEIv2 directly from Kaggle and comply with the licence and terms specified in its data card. The dataset is listed there under the GNU Affero General Public License v3.0 at the time of access. [4]
+> **Data notice:** Dataset files are not copied into this repository. Download OGYEIv2 directly from Kaggle and comply with the licence and terms specified in its data card. The dataset is listed there under the GNU Affero General Public License v3.0 at the time of access.
 
 The notebook expects an archive containing this structure:
 
