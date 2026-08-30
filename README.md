@@ -2,7 +2,8 @@
 
 A computer-vision prototype that classifies photographs of medication pills into **84 known product classes**. The project explores transfer learning with MobileNetV3-small to support visual quality-control workflows in which a medication image must be identified before manual review.
 
-https://stock.adobe.com/images/cute-tablets-pills-and-capsules-cartoon-characters/636554169
+<img width="561" height="360" alt="image" src="https://github.com/user-attachments/assets/c2fac7ec-1814-4e48-837c-8d6490ce5ce2" />
+
 
 > **Scope:** This is an educational image-classification experiment. It is **not** a medical device and must not be used for diagnosis, prescribing, dispensing, or autonomous clinical decisions.
 
